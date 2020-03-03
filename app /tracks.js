@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
         let result = [];
         const tracks = await Track.find().populate('album');
         for (let i = 0; i < tracks.length; i++) {
-            if (tracks[i].album.artist == req.query.artist) {
+            let albumArtist = tracks[i].album.artist;
+            if (String(albumArtist) === req.query.artist) {
                 result.push(tracks[i])
             }
         }
